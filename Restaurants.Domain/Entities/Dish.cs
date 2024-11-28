@@ -6,4 +6,5 @@ public class Dish
     public string Name { get; set; } = default!;
     public string Descritopn { get; set; } = default!;
     public decimal Price { get; set; }
+    public int RestaurantId { get; set; }
 }
