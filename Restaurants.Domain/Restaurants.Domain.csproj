@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Entities\0fs40ogc.lha~" />
+  </ItemGroup>
+
 </Project>
