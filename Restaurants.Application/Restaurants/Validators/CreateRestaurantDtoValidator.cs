@@ -5,8 +5,22 @@ namespace Restaurants.Application.Restaurants.Validators;
 public class CreateRestaurantDtoValidator 
     : AbstractValidator<CreateRestaurantDto>
 {
+    private readonly List<string> validCategory =
+        ["Italian", "Mexican" , "Japanese" , "Indian" , "American"];
     public CreateRestaurantDtoValidator()
     {
+        RuleFor(dto => dto.Category)
+            .Must(category => validCategory.Contains(category))
+            .WithMessage("Invalid Category, please choose from the valid categories.");
+            //.Custom((value , context) =>
+            //{
+            //    var isValidCategory = validCategory.Contains(value);
+            //    if (!isValidCategory)
+            //    {
+            //        context.AddFailure("Category" , "Invalid Category, please choose from the valid categories.");
+            //    }
+            //});
+
         RuleFor(dto => dto.Name)
             .Length(3 , 100);
 
