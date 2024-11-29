@@ -15,8 +15,20 @@ public class RestaurantsController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
-        var restaurants = await _restaurantsService.GetAllRestaurantsAsync();
+        var restaurants = await _restaurantsService.GetAllAsync();
 
         return Ok(restaurants);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var restaurant = await _restaurantsService
+            .GetByIdAsync(id);
+
+        if(restaurant == null) 
+            return NotFound();
+        else
+            return Ok(restaurant);
     }
 }
