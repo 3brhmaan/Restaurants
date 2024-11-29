@@ -12,6 +12,14 @@ internal class RestaurantsRepository : IRestaurantsRepository
         _db = db;
     }
 
+    public async Task<int> CreateAsync(Restaurant restaurant)
+    {
+        await _db.Restaurants.AddAsync(restaurant);
+        await _db.SaveChangesAsync();
+
+        return restaurant.Id;
+    }
+
     public async Task<IEnumerable<Restaurant>> GetAllAsync()
     {
         var restaurants = await _db.Restaurants.ToListAsync();

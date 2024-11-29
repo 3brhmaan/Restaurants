@@ -20,6 +20,13 @@ internal class RestaurantsService : IRestaurantsService
         _mapper = mapper;
     }
 
+    public async Task<int> CreateAsync(CreateRestaurantDto dto)
+    {
+        var restaurant = _mapper.Map<Restaurant>(dto);
+
+        int id = await _restaurantsRepository.CreateAsync(restaurant);
+        return id;
+    }
     public async Task<IEnumerable<RestaurantDto>> GetAllAsync()
     {
         _logger.LogInformation("Getting All restaurnts");
@@ -30,7 +37,6 @@ internal class RestaurantsService : IRestaurantsService
         
         return restaurantsDto;
     }
-
     public async Task<RestaurantDto> GetByIdAsync(int id)
     {
         _logger.LogInformation($"getting restaurant {id}");

@@ -14,5 +14,15 @@ public class RestaurantsProfile : Profile
             .ForMember(d => d.PostalCode , opt => 
                 opt.MapFrom(x => x.Address == null ? null :  x.Address.PostalCode))
             .ForMember(d => d.Dishes , opt => opt.MapFrom(x => x.Dishes));
+
+        CreateMap<CreateRestaurantDto , Restaurant>()
+            .ForMember(d => d.Address , opt => opt.MapFrom(
+                src => new Address
+                {
+                    City = src.City,
+                    Street = src.Street,
+                    PostalCode = src.PostalCode
+                }
+            ));
     }
 }
