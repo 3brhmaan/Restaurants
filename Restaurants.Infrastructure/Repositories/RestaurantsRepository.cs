@@ -41,5 +41,7 @@ internal class RestaurantsRepository : IRestaurantsRepository
 
         return restaurant;
     }
+
+    public async Task SaveChanges() => await _db.SaveChangesAsync();
 }
 
