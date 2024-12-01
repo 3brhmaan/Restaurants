@@ -2,7 +2,7 @@ using Restaurants.Infrastructure.Extensions;
 using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Seeders;
 using Serilog;
-
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +14,9 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Host.UseSerilog((ctx , cfg) =>
 {
-    cfg.WriteTo.Console();
+    cfg
+    .MinimumLevel.Override("Microsoft" , LogEventLevel.Warning)
+    .WriteTo.Console();
 });
 
 
