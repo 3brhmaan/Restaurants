@@ -9,12 +9,12 @@ namespace Restaurants.Application.Restaurants.Queries.GetRestaurantById;
 public class GetRestaurantByIdHandler :
     IRequestHandler<GetRestaurantByIdQuery , RestaurantDto>
 {
-    private readonly IRestaurantsRepository _restaurantsRepository;
+    private readonly IRepositoryManager _repositoryManager;
     private readonly IMapper _mapper;
     private readonly ILogger<GetRestaurantByIdHandler> _logger;
-    public GetRestaurantByIdHandler(IRestaurantsRepository restaurantsRepository , IMapper mapper , ILogger<GetRestaurantByIdHandler> logger)
+    public GetRestaurantByIdHandler(IRepositoryManager restaurantsRepository , IMapper mapper , ILogger<GetRestaurantByIdHandler> logger)
     {
-        _restaurantsRepository = restaurantsRepository;
+        _repositoryManager = restaurantsRepository;
         _mapper = mapper;
         _logger = logger;
     }
@@ -23,7 +23,7 @@ public class GetRestaurantByIdHandler :
     {
         _logger.LogInformation($"getting restaurant {request.Id}");
 
-        var restaurant = await _restaurantsRepository
+        var restaurant = await _repositoryManager.RestaurantsRepository
             .GetByIdAsync(request.Id);
 
         if(restaurant is null)

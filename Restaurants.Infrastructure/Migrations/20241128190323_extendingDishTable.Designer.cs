@@ -11,7 +11,7 @@ using Restaurants.Infrastructure.Persistance;
 
 namespace Restaurants.Infrastructure.Migrations
 {
-    [DbContext(typeof(RestaurantDbContext))]
+    [DbContext(typeof(RepositoryDbContext))]
     [Migration("20241128190323_extendingDishTable")]
     partial class extendingDishTable
     {

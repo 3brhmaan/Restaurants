@@ -11,14 +11,14 @@ public static class ServiceCollectionExtension
 {
     public static void AddInfrastructure(this IServiceCollection services , IConfiguration configuration)
     {
-        services.AddDbContext<RestaurantDbContext>(opts =>
+        services.AddDbContext<RepositoryDbContext>(opts =>
         {
             opts.UseSqlServer(configuration.GetConnectionString("Default"))
                 .EnableSensitiveDataLogging();
         });
 
         services.AddScoped<IRestaurantSeeder , RestaurantSeeder>();
-        services.AddScoped<IRestaurantsRepository , RestaurantsRepository>();
+        services.AddScoped<IRepositoryManager , RepositoryManager>();
     }
 
 }

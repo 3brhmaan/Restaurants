@@ -10,7 +10,7 @@ using Restaurants.Infrastructure.Persistance;
 
 namespace Restaurants.Infrastructure.Migrations
 {
-    [DbContext(typeof(RestaurantDbContext))]
+    [DbContext(typeof(RepositoryDbContext))]
     [Migration("20241128190001_fixing typo in entities attributes name")]
     partial class fixingtypoinentitiesattributesname
     {

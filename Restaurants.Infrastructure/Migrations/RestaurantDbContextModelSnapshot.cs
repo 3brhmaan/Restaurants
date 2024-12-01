@@ -10,7 +10,7 @@ using Restaurants.Infrastructure.Persistance;
 
 namespace Restaurants.Infrastructure.Migrations
 {
-    [DbContext(typeof(RestaurantDbContext))]
+    [DbContext(typeof(RepositoryDbContext))]
     partial class RestaurantDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

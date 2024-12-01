@@ -12,5 +12,4 @@ public interface IRestaurantsRepository
     Task DeleteAsync(Restaurant restaurant);
     Task<IEnumerable<Restaurant>> GetAllAsync();
     Task<Restaurant> GetByIdAsync(int id);
-    Task SaveChanges();
 }

@@ -6,8 +6,8 @@ using Restaurants.Infrastructure.Persistance;
 namespace Restaurants.Infrastructure.Repositories;
 internal class RestaurantsRepository : IRestaurantsRepository
 {
-    private readonly RestaurantDbContext _db;
-    public RestaurantsRepository(RestaurantDbContext db)
+    private readonly RepositoryDbContext _db;
+    public RestaurantsRepository(RepositoryDbContext db)
     {
         _db = db;
     }
@@ -15,7 +15,6 @@ internal class RestaurantsRepository : IRestaurantsRepository
     public async Task<int> CreateAsync(Restaurant restaurant)
     {
         await _db.Restaurants.AddAsync(restaurant);
-        await _db.SaveChangesAsync();
 
         return restaurant.Id;
     }
@@ -23,7 +22,6 @@ internal class RestaurantsRepository : IRestaurantsRepository
     public async Task DeleteAsync(Restaurant restaurant)
     {
         _db.Restaurants.Remove(restaurant);
-        await _db.SaveChangesAsync();
     }
 
     public async Task<IEnumerable<Restaurant>> GetAllAsync()
@@ -41,7 +39,5 @@ internal class RestaurantsRepository : IRestaurantsRepository
 
         return restaurant;
     }
-
-    public async Task SaveChanges() => await _db.SaveChangesAsync();
 }
 

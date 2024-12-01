@@ -4,8 +4,8 @@ using Restaurants.Infrastructure.Persistance;
 namespace Restaurants.Infrastructure.Seeders;
 internal class RestaurantSeeder : IRestaurantSeeder
 {
-    private readonly RestaurantDbContext _db;
-    public RestaurantSeeder(RestaurantDbContext db)
+    private readonly RepositoryDbContext _db;
+    public RestaurantSeeder(RepositoryDbContext db)
     {
         _db = db;
     }

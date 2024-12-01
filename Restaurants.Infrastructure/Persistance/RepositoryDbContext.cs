@@ -2,11 +2,11 @@
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.Infrastructure.Persistance;
-internal class RestaurantDbContext : DbContext
+public class RepositoryDbContext : DbContext
 {
     public DbSet<Restaurant> Restaurants { get; set; }
     public DbSet<Dish> Dishes { get; set; }
-    public RestaurantDbContext(DbContextOptions<RestaurantDbContext> options) : base(options)
+    public RepositoryDbContext(DbContextOptions<RepositoryDbContext> options) : base(options)
     {}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

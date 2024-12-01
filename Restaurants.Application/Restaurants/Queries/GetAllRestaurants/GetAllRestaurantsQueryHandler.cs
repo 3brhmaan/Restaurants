@@ -8,12 +8,12 @@ namespace Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 public class GetAllRestaurantsQueryHandler
     : IRequestHandler<GetAllRestaurantsQuery , IEnumerable<RestaurantDto>>
 {
-    private readonly IRestaurantsRepository _restaurantsRepository;
+    private readonly IRepositoryManager _repositoryManager;
     private readonly ILogger<GetAllRestaurantsQueryHandler> _logger;
     private readonly IMapper _mapper;
-    public GetAllRestaurantsQueryHandler(IRestaurantsRepository restaurantsRepository , ILogger<GetAllRestaurantsQueryHandler> logger , IMapper mapper)
+    public GetAllRestaurantsQueryHandler(IRepositoryManager repositoryManager , ILogger<GetAllRestaurantsQueryHandler> logger , IMapper mapper)
     {
-        _restaurantsRepository = restaurantsRepository;
+        _repositoryManager = repositoryManager;
         _logger = logger;
         _mapper = mapper;
     }
@@ -22,7 +22,7 @@ public class GetAllRestaurantsQueryHandler
     {
         _logger.LogInformation("Getting All restaurnts");
 
-        var restaurants = await _restaurantsRepository.GetAllAsync();
+        var restaurants = await _repositoryManager.RestaurantsRepository.GetAllAsync();
 
         var restaurantsDto = _mapper.Map<IEnumerable<RestaurantDto>>(restaurants);
 

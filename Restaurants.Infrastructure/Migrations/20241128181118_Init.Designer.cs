@@ -10,7 +10,7 @@ using Restaurants.Infrastructure.Persistance;
 
 namespace Restaurants.Infrastructure.Migrations
 {
-    [DbContext(typeof(RestaurantDbContext))]
+    [DbContext(typeof(RepositoryDbContext))]
     [Migration("20241128181118_Init")]
     partial class Init
     {
