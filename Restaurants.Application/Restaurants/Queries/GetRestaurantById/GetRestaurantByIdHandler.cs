@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Restaurants.Dtos;
+using Restaurants.Domain.Exceptions;
 using Restaurants.Domain.Repositories;
 
 namespace Restaurants.Application.Restaurants.Queries.GetRestaurantById;
@@ -24,6 +25,10 @@ public class GetRestaurantByIdHandler :
 
         var restaurant = await _restaurantsRepository
             .GetByIdAsync(request.Id);
+
+        if(restaurant is null)
+            throw new RestaurantNotFoundException($"restaurant with Id: {request.Id} doesn't exist");
+
 
         var restaurantDto = _mapper.Map<RestaurantDto>(restaurant);
 

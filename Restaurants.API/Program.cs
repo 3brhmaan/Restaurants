@@ -3,6 +3,7 @@ using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Seeders;
 using Serilog;
 using Serilog.Events;
+using Restaurants.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,8 @@ builder.Host.UseSerilog((ctx , cfg) =>
 
 
 var app = builder.Build();
+
+app.ConfigureExceptionHandler();
 
 #region Seed The Database
 var scope = app.Services.CreateScope();

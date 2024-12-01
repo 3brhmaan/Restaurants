@@ -3,10 +3,11 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 using Restaurants.Domain.Entities;
+using Restaurants.Domain.Exceptions;
 using Restaurants.Domain.Repositories;
 
 namespace Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
-public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCommand , bool>
+public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCommand>
 {
     private readonly IRestaurantsRepository _restaurantsRepository;
     private readonly IMapper _mapper;
@@ -22,16 +23,14 @@ public class UpdateRestaurantCommandHandler : IRequestHandler<UpdateRestaurantCo
         _logger = logger;
     }
 
-    public async Task<bool> Handle(UpdateRestaurantCommand request , CancellationToken cancellationToken)
+    public async Task Handle(UpdateRestaurantCommand request , CancellationToken cancellationToken)
     {
         var restaurant = await _restaurantsRepository.GetByIdAsync(request.Id);
         if ( restaurant == null ) 
-            return false;
+            throw new RestaurantNotFoundException($"restaurant with Id: {request.Id} doesn't exist");
 
         _mapper.Map(request , restaurant);
 
         await _restaurantsRepository.SaveChanges();
-
-        return true;
     }
 }
