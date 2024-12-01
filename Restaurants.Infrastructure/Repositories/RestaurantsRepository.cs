@@ -12,11 +12,9 @@ internal class RestaurantsRepository : IRestaurantsRepository
         _db = db;
     }
 
-    public async Task<int> CreateAsync(Restaurant restaurant)
+    public async Task CreateAsync(Restaurant restaurant)
     {
         await _db.Restaurants.AddAsync(restaurant);
-
-        return restaurant.Id;
     }
 
     public async Task DeleteAsync(Restaurant restaurant)

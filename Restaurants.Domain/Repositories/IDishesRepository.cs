@@ -8,5 +8,5 @@ using System.Threading.Tasks;
 namespace Restaurants.Domain.Repositories;
 public interface IDishesRepository
 {
-    Task<int> Create(Dish dish);
+    Task CreateAsync(Dish dish);
 }

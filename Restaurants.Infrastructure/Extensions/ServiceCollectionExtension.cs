@@ -19,6 +19,8 @@ public static class ServiceCollectionExtension
 
         services.AddScoped<IRestaurantSeeder , RestaurantSeeder>();
         services.AddScoped<IRepositoryManager , RepositoryManager>();
+        services.AddScoped<IRestaurantsRepository , RestaurantsRepository>();
+        services.AddScoped<IDishesRepository , DishesRepository>();
     }
 
 }

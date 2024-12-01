@@ -26,9 +26,9 @@ public class CreateRestaurantCommandHandler : IRequestHandler<CreateRestaurantCo
     {
         var entity = _mapper.Map<Restaurant>(request);
 
-        int id = await _repositoryManager.RestaurantsRepository.CreateAsync(entity);
+        await _repositoryManager.RestaurantsRepository.CreateAsync(entity);
         await _repositoryManager.SaveChangesAsync();
 
-        return id;
+        return entity.Id;
     }
 }

@@ -8,7 +8,11 @@ public class RepositoryManager : IRepositoryManager
     public IDishesRepository DishesRepository { get;}
     private readonly RepositoryDbContext repositoryDbContext;
 
-    public RepositoryManager(IDishesRepository dishesRepository , IRestaurantsRepository restaurantsRepository , RepositoryDbContext repositoryDbContext)
+    public RepositoryManager(
+        IDishesRepository dishesRepository , 
+        IRestaurantsRepository restaurantsRepository , 
+        RepositoryDbContext repositoryDbContext
+    )
     {
         DishesRepository = dishesRepository;
         RestaurantsRepository = restaurantsRepository;
