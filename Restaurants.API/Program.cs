@@ -16,6 +16,7 @@ builder.Host.UseSerilog((ctx , cfg) =>
 {
     cfg
     .MinimumLevel.Override("Microsoft" , LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.EntityFrameworkCore" , LogEventLevel.Information)
     .WriteTo.Console();
 });
 
