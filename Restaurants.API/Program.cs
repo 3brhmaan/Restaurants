@@ -17,7 +17,7 @@ builder.Host.UseSerilog((ctx , cfg) =>
     cfg
     .MinimumLevel.Override("Microsoft" , LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.EntityFrameworkCore" , LogEventLevel.Information)
-    .WriteTo.Console();
+    .WriteTo.Console(outputTemplate: "[{Timestamp:dd-MM HH:mm:ss} {Level:u3}] |{SourceContext}| {NewLine}{Message:lj}{NewLine}{Exception}");
 });
 
 
