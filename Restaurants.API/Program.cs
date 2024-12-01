@@ -18,12 +18,13 @@ builder.Host.UseSerilog((ctx , cfg) =>
 {
     cfg.ReadFrom.Configuration(ctx.Configuration);
 });
-
+builder.Services.AddScoped<RequestTimeLoggingMiddleware>();
 
 
 var app = builder.Build();
 
 app.ConfigureExceptionHandler();
+app.UseMiddleware<RequestTimeLoggingMiddleware>();
 
 #region Seed The Database
 var scope = app.Services.CreateScope();
