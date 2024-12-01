@@ -1,11 +1,18 @@
 ﻿using Restaurants.Domain.Entities;
 using Restaurants.Domain.Repositories;
+using Restaurants.Infrastructure.Persistance;
 
 namespace Restaurants.Infrastructure.Repositories;
 public class DishesRepository : IDishesRepository
 {
-    public Task<int> Create(Dish dish)
+    private readonly RepositoryDbContext _db;
+    public DishesRepository(RepositoryDbContext db)
     {
-        throw new NotImplementedException();
+        _db = db;
+    }
+
+    public async Task CreateAsync(Dish dish)
+    {
+        await _db.Dishes.AddAsync(dish);
     }
 }
