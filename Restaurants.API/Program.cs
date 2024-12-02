@@ -4,6 +4,7 @@ using Restaurants.Infrastructure.Seeders;
 using Serilog;
 using Serilog.Events;
 using Restaurants.API.Middlewares;
+using Restaurants.Domain.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddScoped<RequestTimeLoggingMiddleware>();
 
 
 var app = builder.Build();
+
+app.MapIdentityApi<User>();
 
 app.ConfigureExceptionHandler();
 app.UseMiddleware<RequestTimeLoggingMiddleware>();
