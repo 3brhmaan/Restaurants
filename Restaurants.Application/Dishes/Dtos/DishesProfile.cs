@@ -7,7 +7,7 @@ public class DishesProfile : Profile
 {
     public DishesProfile()
     {
-        CreateMap<Dish , DishDto>();
+        CreateMap<Dish , DishDto>().ReverseMap();
         CreateMap<CreateDishCommand , Dish>();
     }
 }
