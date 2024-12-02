@@ -25,9 +25,12 @@ public class DishesController : ControllerBase
     public async Task<IActionResult> CreateDish(int restaurantId , CreateDishCommand command)
     {
         command.RestaurantId = restaurantId;
-        await _mediator.Send(command);
+        int dishId = await _mediator.Send(command);
 
-        return Created();
+        return CreatedAtAction(nameof(GetDishForRestaurant) , new {
+            restaurantId ,
+            dishId
+        } , null);
     }
 
     [HttpGet]
