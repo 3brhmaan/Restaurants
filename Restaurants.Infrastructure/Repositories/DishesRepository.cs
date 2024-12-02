@@ -15,4 +15,10 @@ public class DishesRepository : IDishesRepository
     {
         await _db.Dishes.AddAsync(dish);
     }
+
+    public Task DeleteAsync(IEnumerable<Dish> dishes)
+    {
+        _db.Dishes.RemoveRange(dishes);
+        return Task.CompletedTask;
+    }
 }

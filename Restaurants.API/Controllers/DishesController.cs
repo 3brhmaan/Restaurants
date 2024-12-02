@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Dishes.Commands.CreateDish;
+using Restaurants.Application.Dishes.Commands.DeleteDishesForRestaurant;
 using Restaurants.Application.Dishes.Dtos;
-using Restaurants.Application.Dishes.Queries;
+using Restaurants.Application.Dishes.Queries.GetDishesForRestaurant;
+using Restaurants.Application.Dishes.Queries.GetDishForRestaurant;
 
 namespace Restaurants.API.Controllers;
 
@@ -36,5 +38,25 @@ public class DishesController : ControllerBase
         var dishesForRestaurant = await _mediator.Send(new GetDishesForRestaurantQuery(restaurantId));
 
         return Ok(dishesForRestaurant);
+    }
+
+    [HttpGet("{dishId}")]
+    [ProducesResponseType(StatusCodes.Status200OK , Type = typeof(DishDto))]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetDishForRestaurant(int restaurantId , int dishId)
+    {
+        var dishForRestaurant = await _mediator.Send(new GetDishForRestaurantQuery(restaurantId , dishId));
+
+        return Ok(dishForRestaurant);
+    }
+
+    [HttpDelete]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> DeleteDishesForRestaurant(int restaurantId)
+    {
+        await _mediator.Send(new DeleteDishesForRestaurantCommand(restaurantId));
+
+        return NoContent();
     }
 }
