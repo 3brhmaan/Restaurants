@@ -44,7 +44,7 @@ builder.Services.AddScoped<RequestTimeLoggingMiddleware>();
 
 var app = builder.Build();
 
-app.MapIdentityApi<User>();
+app.MapGroup("api/identity").MapIdentityApi<User>();
 
 app.ConfigureExceptionHandler();
 app.UseMiddleware<RequestTimeLoggingMiddleware>();
