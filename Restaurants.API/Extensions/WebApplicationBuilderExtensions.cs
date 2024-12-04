@@ -37,5 +37,6 @@ public static class WebApplicationBuilderExtensions
             cfg.ReadFrom.Configuration(ctx.Configuration);
         });
 
+        builder.Services.AddEndpointsApiExplorer();
     }
 }
