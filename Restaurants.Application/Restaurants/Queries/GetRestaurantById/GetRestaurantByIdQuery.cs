@@ -6,4 +6,8 @@ public class GetRestaurantByIdQuery
     : IRequest<RestaurantDto>
 {
     public int Id { get; set; }
+    public GetRestaurantByIdQuery(int id)
+    {
+        Id = id;
+    }
 }
