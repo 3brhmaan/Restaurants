@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Restaurants.API.ActionFilters;
 using Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 using Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
 using Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
@@ -44,6 +45,7 @@ public class RestaurantsController : ControllerBase
 
     [HttpPost]
     [Authorize(Roles = UserRoles.Owner)]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<IActionResult> CreateRestaurant(CreateRestaurantCommand command)
     {
@@ -63,6 +65,7 @@ public class RestaurantsController : ControllerBase
     }
 
     [HttpPatch("{id}")]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateRestaurant(int id , UpdateRestaurantCommand command)
