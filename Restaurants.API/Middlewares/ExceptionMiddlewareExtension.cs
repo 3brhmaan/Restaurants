@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
+using Restaurants.Domain.ErrorModel;
 using Restaurants.Domain.Exceptions;
 
 namespace Restaurants.API.Middlewares;
@@ -25,8 +26,13 @@ public static class ExceptionMiddlewareExtensions
                         _ => StatusCodes.Status500InternalServerError
                     };
 
-
-                    await context.Response.WriteAsync(contextFeature.Error.Message);
+                    await context.Response.WriteAsync(
+                        new ErrorDetails()
+                        {
+                            StatusCode = context.Response.StatusCode ,
+                            Message = contextFeature.Error.Message
+                        }.ToString()
+                    );
                 }
             });
         });
