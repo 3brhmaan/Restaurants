@@ -1,4 +1,6 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
+using Restaurants.API.ActionFilters;
 using Restaurants.API.Middlewares;
 using Serilog;
 
@@ -38,5 +40,11 @@ public static class WebApplicationBuilderExtensions
         });
 
         builder.Services.AddEndpointsApiExplorer();
+
+        builder.Services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.SuppressModelStateInvalidFilter = true;
+        });
+        builder.Services.AddScoped<ValidationFilterAttribute>();
     }
 }
