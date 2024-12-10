@@ -18,7 +18,8 @@ public class ValidationFilterAttribute : IActionFilter
         var controller = context.RouteData.Values["controller"];
 
         var param = context.ActionArguments
-            .SingleOrDefault(x => x.Value.ToString().Contains("Command")).Value;
+            .SingleOrDefault(x => x.Value.ToString()
+            .Contains("Command")).Value;
 
         if (param is null)
         {
@@ -43,11 +44,10 @@ public class ValidationFilterAttribute : IActionFilter
                         .Where(ms => ms.Value.Errors.Any())
                         .ToDictionary(
                             ms => ms.Key ,
-                            ms => ms.Value
-                                    .Errors
+                            ms => ms.Value.Errors
                                     .Select(error => error.ErrorMessage)
                                     .ToArray()
-                        )
+                        ) 
                 }
             );
         }
