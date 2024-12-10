@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurants.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using Restaurants.Infrastructure.Persistance;
 namespace Restaurants.Infrastructure.Migrations
 {
     [DbContext(typeof(RepositoryDbContext))]
-    partial class RestaurantDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241210113825_seedingIdentityUserRolesTable")]
+    partial class seedingIdentityUserRolesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,23 +50,6 @@ namespace Restaurants.Infrastructure.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "e3d4ab65-ff5e-43ca-ba8f-636031dcca2b",
-                            Name = "User"
-                        },
-                        new
-                        {
-                            Id = "2e111b24-88f2-4112-9d4b-5d2f2715813b",
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            Id = "ed5ad1e3-e4e3-4a3e-86f8-2327b06a446c",
-                            Name = "Owner"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -18,5 +18,6 @@ public class RepositoryDbContext : IdentityDbContext<User>
             .OwnsOne(x => x.Address);
 
         modelBuilder.ApplyConfiguration(new IdentityRoleConfiguration());
+        modelBuilder.ApplyConfiguration(new IdentityUserRoleConfiguration());
     }
 }
