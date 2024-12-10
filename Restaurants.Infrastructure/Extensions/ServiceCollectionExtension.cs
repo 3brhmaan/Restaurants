@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Restaurants.Domain.Entities;
@@ -23,6 +24,7 @@ public static class ServiceCollectionExtension
         services.AddScoped<IRestaurantsRepository , RestaurantsRepository>();
         services.AddScoped<IDishesRepository , DishesRepository>();
         services.AddIdentityApiEndpoints<User>()
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<RepositoryDbContext>();
     }
 
