@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Restaurants.Domain.Entities;
+using Restaurants.Infrastructure.Configuration;
 
 namespace Restaurants.Infrastructure.Persistance;
 public class RepositoryDbContext : IdentityDbContext<User>
@@ -15,5 +16,7 @@ public class RepositoryDbContext : IdentityDbContext<User>
 
         modelBuilder.Entity<Restaurant>()
             .OwnsOne(x => x.Address);
+
+        modelBuilder.ApplyConfiguration(new IdentityRoleConfiguration());
     }
 }
